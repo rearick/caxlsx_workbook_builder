@@ -442,11 +442,11 @@ class ExcelReport
     style_hash
   end
 
-  def package()
+  def package
     @report
   end
 
-  def workbook()
+  def workbook
     @workbook
   end
 
@@ -454,7 +454,7 @@ class ExcelReport
     @workbook.worksheets[index]
   end
 
-  def serialize()
-    @report.serialize("#{@report_conf["workbook_name"].downcase.gsub(/\s/, "-")}_#{@time_stamp.strftime(@moment)}.xlsx")
+  def serialize
+    @report.serialize("#{@report_conf["workbook_attribs"]["output_path"]}/#{@report_conf["workbook_attribs"]["name"]}.xlsx")
   end
 end
