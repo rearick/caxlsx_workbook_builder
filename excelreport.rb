@@ -455,6 +455,6 @@ class ExcelReport
   end
 
   def serialize
-    @report.serialize("#{@report_conf["workbook_attribs"]["output_path"]}/#{@report_conf["workbook_attribs"]["name"]}.xlsx")
+    @report.serialize("#{@report_conf["output"]["dir"]}/#{@report_conf["output"]["name"]}.xlsx")
   end
 end
