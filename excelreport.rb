@@ -137,11 +137,9 @@ class ExcelReport
       end
       coordinates = coords(top_left_cell)
       sheet.sheet_view.pane do |pane|
-        pane.top_left_cell = top_left_cell
-        pane.state = :frozen_split
+        pane.state = :frozen
         pane.y_split = coordinates[:y_split]
         pane.x_split = coordinates[:x_split]
-        pane.active_pane = :bottom_right
       end
     end
     sheet.sheet_view.add_selection(:top_left, { active_cell: worksheet["active_cell"], sqref: worksheet["active_cell"] }) if worksheet["active_cell"]
@@ -455,6 +453,12 @@ class ExcelReport
   end
 
   def serialize
-    @report.serialize("#{@report_conf["output"]["dir"]}/#{@report_conf["output"]["name"]}.xlsx")
+    unless @report_conf["output"]["dir"].class == Array
+      @report.serialize("#{@report_conf["output"]["dir"]}/#{@report_conf["output"]["name"]}.xlsx")
+    else
+      @report_conf["output"]["dir"].each do |dir|
+        @report.serialize("#{dir}/#{@report_conf["output"]["name"]}.xlsx")
+      end
+    end
   end
 end
